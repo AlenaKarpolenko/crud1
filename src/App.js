@@ -1,24 +1,23 @@
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import Menu from "./components/Menu";
-import TimeAttackPage from "./pages/TimeAttackPage";
-import ForzaPage from "./pages/ForzaPage";
-import DriftPage from "./pages/DriftPage";
-import HomePage from "./pages/HomePage";
+import Home from "./pages/Home";
+import AddOrEditPost from "./pages/AddOrEditPost";
+import PostsProvider from "./PostsProvider";
+import ViewCard from "./pages/ViewCard";
 
 export default function App() {
-  return (
-      <Router>
-        <div>
-          <Menu />
-          <div className="page">
-              <Routes>
-                  <Route path="/" exact element={<HomePage/>} />
-                  <Route path="/drift" element={<DriftPage />} />
-                  <Route path="/timeattack" element={<TimeAttackPage />} />
-                  <Route path="/forza" element={<ForzaPage />} />
-              </Routes>
-          </div>
-        </div>
-      </Router>
-  );
+    return (
+        <PostsProvider>
+            <Router>
+                <div>
+                    <div className="page">
+                        <Routes>
+                            <Route path="/" exact element={<Home/>} />
+                            <Route path="/posts/new" exact element={<AddOrEditPost/>} />
+                            <Route path="/posts/:id" exact element={<ViewCard/>} />
+                        </Routes>
+                    </div>
+                </div>
+            </Router>
+        </PostsProvider>
+    );
 }
